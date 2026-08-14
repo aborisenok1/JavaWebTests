@@ -65,13 +65,23 @@ public class LoginPage extends BasePage {
         return errorMessage.shouldBe(visible).getText();
     }
 
-    @Step("Входим на сайт с логином: {username} и {password}")
-    public void login(String username, String password) {
+    @Step("Вводин на сайте логин: {username}")
+    public void login(String username) {
         usernameField.shouldBe(visible).click();
         usernameField.shouldBe(visible).setValue(username);
+    }
+
+    @Step("Вводин на сайте пароль: {password}")
+    public void password(String password) {
         passwordField.shouldBe(visible).click();
         passwordField.shouldBe(visible).setValue(password);
+    }
+
+    @Step("Делаем клин по кнопке логина")
+    public void click() {
         loginButton.shouldBe(visible).click();
+        usernameField.shouldBe(visible).clear();
+        passwordField.shouldBe(visible).clear();
     }
 
     @Step("Переходим на страницу восстановления пароля")
