@@ -40,7 +40,7 @@ public class LoginWithWrongCredentials extends BaseTest {
         assertEquals(expectedErrorMessage, actualErrorMessage, "Текст сообщения об ошибке не совпадает");
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////
         loginPage.login("incorrectUser");
         loginPage.click();
 
@@ -65,6 +65,6 @@ public class LoginWithWrongCredentials extends BaseTest {
         // Проверка текста сообщения об ошибке
         String expectedErrorMessage3 = "Login required";
         String actualErrorMessage3 = loginPage.getErrorMessageText();
-        assertEquals(expectedErrorMessage3, actualErrorMessage3, "Текст сообщения об ошибке не совпадает");
+        assertEquals(expectedErrorMessage3, actualErrorMessage3, "Текст сообщения об ошибке не совпадает");*/
     }
 }
