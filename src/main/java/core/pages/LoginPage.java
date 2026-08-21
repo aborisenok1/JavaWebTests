@@ -33,6 +33,8 @@ public class LoginPage extends BasePage {
     //private SelenideElement errorMessage = $(".input-e.login_error");
     private SelenideElement errorMessage = $x("//span[@data-test-id='login-form-error']");
 
+    // Локатор для перехода к восстановлению
+    private SelenideElement goToRecoveryButton = $("[data-test-id='recovery-action']");
 
     {
         verifyPageElements();
@@ -50,6 +52,16 @@ public class LoginPage extends BasePage {
         mailRuButton.shouldBe(visible);
     }
 
+    @Step("Нажимаем кнопку Войти")
+    public void clickLogin() {
+        loginButton.shouldBe(visible).click();
+    }
+
+    @Step("Нажимаем кнопку Восстановить профиль")
+    public void goToRecovery() {
+        goToRecoveryButton.shouldBe(visible).click();
+    }
+
     @Step("Ожидание отображения ошибки")
     public void errorMessageShouldBeVisible() {
         errorMessage.shouldBe(visible).click();
@@ -63,6 +75,14 @@ public class LoginPage extends BasePage {
     @Step("Получаем текст сообщения об ошибке входа")
     public String getErrorMessageText() {
         return errorMessage.shouldBe(visible).getText();
+    }
+
+    @Step("Вводин на сайте логин: {username} и пароль: {password}")
+    public void loginAndPassword(String username, String password) {
+        usernameField.shouldBe(visible).click();
+        usernameField.shouldBe(visible).setValue(username);
+        passwordField.shouldBe(visible).click();
+        passwordField.shouldBe(visible).setValue(password);
     }
 
     @Step("Вводин на сайте логин: {username}")
