@@ -44,12 +44,12 @@ public class AnonymRecoveryTest extends BaseTest {
         anonymRecoveryPage = new AnonymRecoveryPage();
         anonymRecoveryPage.goToRecoveryByPhone();
         anonymRecoveryPage.verifyElementsOnTheRecoveryByPhonePage();
-        Thread.sleep(1000);
+        Thread.sleep(1000); // добавил чисто ради удобства визуального восприятия :)
 
         String countryCode = anonymRecoveryPage.selectCountryByName("Poland");
         assertEquals("+48", countryCode, "Код страны не совпадает с ожидаемым");
         Thread.sleep(1000); // добавил чисто ради удобства визуального восприятия :)
         anonymRecoveryPage.getCodeButtonClickAndCheckErrorMessage();
-        Thread.sleep(1000);
+        Thread.sleep(1000); // добавил чисто ради удобства визуального восприятия :)
     }
 }
