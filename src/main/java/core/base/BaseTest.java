@@ -30,7 +30,7 @@ public class BaseTest {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = baseUrl;
-        Configuration.timeout = 40000; // 10 секунд таймаут
+        Configuration.timeout = 10000; // 10 секунд таймаут
 
         System.out.println("Base URL set to: " + baseUrl);
 
