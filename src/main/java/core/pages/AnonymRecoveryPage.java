@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byCssSelector;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AnonymRecoveryPage extends BasePage {
 
@@ -21,6 +22,8 @@ public class AnonymRecoveryPage extends BasePage {
     private SelenideElement phoneField = $x("//input[@tsid='phone-form_input_fe1c7a']");
     private SelenideElement emailField = $(byCssSelector("[id='field_email']"));
     private SelenideElement countryRegionDropDown = $x("//input[@data-popular-locale='Popular']");
+    private SelenideElement getCodeButton = $(byCssSelector("[class='button-pro __wide js-proceed-registration']"));
+    private SelenideElement incorrectPhoneMessage = $(byCssSelector("[class='input-e js-ph-vl-hint']"));
 
 
     // Конструктор
@@ -61,5 +64,22 @@ public class AnonymRecoveryPage extends BasePage {
     public void verifyElementsOnTheRecoveryByEmailPage() {
         getCodeButtonOnTheEmailPage.shouldBe(visible);
         emailField.shouldBe(visible);
+    }
+
+    @Step("Выбираем код страны по названию: {countryName}")
+    public String selectCountryByName(String countryName) {
+        countryRegionDropDown.click(); // Открываем список стран
+        SelenideElement countryItem = $(String.format(".country-select_i[data-name='%s']", countryName)); // Находим нужный элемент
+        countryItem.scrollTo();
+        String countryCode = countryItem.find(".country-select_code").text(); // Прокручиваем к стране и выбираем нужный код
+        countryItem.click();
+        return countryCode;
+    }
+
+    @Step("Нажимает кнопку \"Get code\" и проверяем сообщение об ошибке")
+    public void getCodeButtonClickAndCheckErrorMessage() {
+        getCodeButton.shouldBe(visible).click();
+        incorrectPhoneMessage.shouldBe(visible);
+        assertEquals("Incorrect phone number.", incorrectPhoneMessage.text());
     }
 }
