@@ -5,13 +5,12 @@ import core.pages.LoginPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class LoginWithWrongCredentials extends BaseTest {
+public class LoginPageTests extends BaseTest {
     private static LoginPage loginPage;
 
     @BeforeEach
@@ -19,8 +18,6 @@ public class LoginWithWrongCredentials extends BaseTest {
         open(baseUrl);
         // Принятие cookies и политики
         loginPage = new LoginPage();
-        //loginPage.acceptCookie();
-        //loginPage.acceptPrivacyButton();
     }
 
     @Test
@@ -41,7 +38,7 @@ public class LoginWithWrongCredentials extends BaseTest {
     }
 
     @Test
-    public void LoginWithWrongLoginAndBlankPassword() {
+    public void loginWithWrongLoginAndBlankPassword() {
         loginPage.password("incorrectPassword");
         loginPage.click();
 
@@ -56,7 +53,7 @@ public class LoginWithWrongCredentials extends BaseTest {
     }
 
     @Test
-    public void LoginWithBlankLoginAndWrongPassword() {
+    public void loginWithBlankLoginAndWrongPassword() {
         loginPage.password("incorrectPassword");
         loginPage.click();
 
@@ -68,5 +65,25 @@ public class LoginWithWrongCredentials extends BaseTest {
         String expectedErrorMessage3 = "Login required";
         String actualErrorMessage3 = loginPage.getErrorMessageText();
         assertEquals(expectedErrorMessage3, actualErrorMessage3, "Текст сообщения об ошибке не совпадает");
+    }
+
+    @Test
+    public void verifyQrCodeAndOtherElementsVisibility() throws InterruptedException {
+        loginPage.qRCodeButtonClick();
+        loginPage.qRCodePageElementsCheck();
+    }
+
+    @Test
+    public void customerSupportTeamPopupTest() {
+        loginPage.cantSignInButtonClick();
+        loginPage.contactCustomerSupportTeamButtonClick();
+        loginPage.contactCustomerSupportTeamElementsCheck();
+        loginPage.closeCrossButtonClick();
+        loginPage.contactCustomerSupportTeamShouldNotBeDisplayedCheck();
+    }
+
+    @Test
+    public void groupsSearchTest() throws InterruptedException {
+        loginPage.enterDataInSearchFieldAndClickSearchButton("Тестировщик");
     }
 }

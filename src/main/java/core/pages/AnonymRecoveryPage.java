@@ -12,10 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AnonymRecoveryPage extends BasePage {
 
-    //private SelenideElement recoveryByPhoneButton = $x("//svg[@class='svg-ic svg-ico_phone_24 svg-ic48']");
     private SelenideElement recoveryByPhoneButton = $(byCssSelector("[class='svg-ic svg-ico_phone_24 svg-ic48']"));
     private SelenideElement recoveryByEmailButton = $(byCssSelector("[data-l='t,email']"));
-    //private SelenideElement goToSupportButton = $(byCssSelector("[data-l='t,support']"));
     private SelenideElement goToSupportButton = $x("//div[@class='support-link_item-text']");
     private SelenideElement getCodeButtonOnThePhonePage = $x("//input[@class='button-pro __wide js-proceed-registration']");
     private SelenideElement getCodeButtonOnTheEmailPage = $(byCssSelector("[data-l='t,submit']"));
@@ -24,6 +22,7 @@ public class AnonymRecoveryPage extends BasePage {
     private SelenideElement countryRegionDropDown = $x("//input[@data-popular-locale='Popular']");
     private SelenideElement getCodeButton = $(byCssSelector("[class='button-pro __wide js-proceed-registration']"));
     private SelenideElement incorrectPhoneMessage = $(byCssSelector("[class='input-e js-ph-vl-hint']"));
+    private SelenideElement customerSupportTeamButton = $(byCssSelector("[class='support-link_item-text']"));
 
 
     // Конструктор
@@ -36,6 +35,7 @@ public class AnonymRecoveryPage extends BasePage {
         recoveryByPhoneButton.shouldBe(visible);
         recoveryByEmailButton.shouldBe(visible);
         goToSupportButton.shouldBe(visible);
+        customerSupportTeamButton.shouldBe(visible);
     }
 
     @Step("Нажимаем на кнопку восстановления через телефон")
@@ -81,5 +81,13 @@ public class AnonymRecoveryPage extends BasePage {
         getCodeButton.shouldBe(visible).click();
         incorrectPhoneMessage.shouldBe(visible);
         assertEquals("Incorrect phone number.", incorrectPhoneMessage.text());
+    }
+
+    @Step("Проверяем наличие элементов на странице восстановления")
+    public void checkPageElements() {
+        recoveryByPhoneButton.shouldBe(visible);
+        recoveryByEmailButton.shouldBe(visible);
+        goToSupportButton.shouldBe(visible);
+        customerSupportTeamButton.shouldBe(visible);
     }
 }
