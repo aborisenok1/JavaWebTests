@@ -6,10 +6,9 @@ import core.base.BasePage;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginPage extends BasePage {
 
@@ -36,6 +35,18 @@ public class LoginPage extends BasePage {
     // Локатор для перехода к восстановлению
     private SelenideElement goToRecoveryButton = $("[data-test-id='recovery-action']");
 
+    private SelenideElement qRCodeButton = $("[data-l='t,qr_tab']");
+    private SelenideElement getACodeForQuickLogInToOK = $("[class='qr_code_info_header']");
+    private SelenideElement textBlock = $("[class='qr_code_info_instruction_list']");
+    private SelenideElement yourAuthorizationCodeText = $("[class='qr_code_info_digest_info']");
+    private SelenideElement qRCode = $("[class='qr_code_image_wrapper']");
+    private SelenideElement cantSignInButton = $("[data-test-id='forgot-password-link']");
+    private SelenideElement contactCustomerSupportTeamButton = $("[class='support-link_item-text']");
+    private SelenideElement sendMessageButton = $("[class='form-actions_yes button-pro js-submit']");
+    private SelenideElement closeCrossButton = $("[class='ic modal-new_close_ico']");
+    private SelenideElement searchFieldInHeader = $("[name='st.query']");
+    private SelenideElement groupList = $x("//a[@href=\"/groups\" and @data-active=\"true\"]");
+
     {
         verifyPageElements();
     }
@@ -50,6 +61,8 @@ public class LoginPage extends BasePage {
         vkButton.shouldBe(visible);
         googleButton.shouldBe(visible);
         mailRuButton.shouldBe(visible);
+        qRCodeButton.shouldBe(visible);
+        cantSignInButton.shouldBe(visible);
     }
 
     @Step("Нажимаем кнопку Войти")
@@ -128,5 +141,59 @@ public class LoginPage extends BasePage {
     @Step("Входим на сайт через Mail.ru")
     public void loginWithMailRu() {
         mailRuButton.shouldBe(Condition.visible).click();
+    }
+
+    @Step("Нажимаем кнопку Can't sign in?")
+    public void cantSignInButtonClick() {
+        cantSignInButton.shouldBe(visible).click();
+    }
+
+    @Step("Нажимаем кнопку Contact Customer Support Team")
+    public void contactCustomerSupportTeamButtonClick() {
+        contactCustomerSupportTeamButton.shouldBe(visible).click();
+    }
+
+    @Step("Кликнуть QR Code button")
+    public void qRCodeButtonClick() {
+        qRCodeButton.shouldBe(visible).click();
+    }
+
+    @Step("Закрыть модальное окно")
+    public void closeCrossButtonClick() {
+        sleep(1000);
+        closeCrossButton.shouldBe(visible).click();
+    }
+
+    @Step("Проверка отображения элементов на QR Code странице")
+    public void qRCodePageElementsCheck() {
+        qRCodeButton.shouldBe(visible).click();
+        getACodeForQuickLogInToOK.shouldBe(visible);
+        assertEquals("Get a code for quick log in to OK", getACodeForQuickLogInToOK.text());
+        assertTrue(textBlock.text().contains("Open your phone camera and scan this QR code"));
+        assertTrue(textBlock.text().contains("Follow the link that opens"));
+        assertTrue(textBlock.text().contains("Check the authorization code below and confirm log in"));
+        yourAuthorizationCodeText.shouldBe(visible);
+        assertTrue(yourAuthorizationCodeText.text().contains("Your authorization code: "));
+        qRCode.shouldBe(visible);
+    }
+
+    @Step("Проверка отображения элементов на странице 'Contact the Customer Support Team'")
+    public void contactCustomerSupportTeamElementsCheck() {
+        sendMessageButton.shouldBe(visible);
+        closeCrossButton.shouldBe(visible);
+    }
+
+    @Step("Проверка отсутствия отображения модального окна 'Contact the Customer Support Team' на странице")
+    public void contactCustomerSupportTeamShouldNotBeDisplayedCheck() {
+        sendMessageButton.shouldNotBe(visible);
+        closeCrossButton.shouldNotBe(visible);
+    }
+
+    @Step("Ввести в поле поиска и начать Search button")
+    public void enterDataInSearchFieldAndClickSearchButton(String text) {
+        searchFieldInHeader.should(visible).click();
+        searchFieldInHeader.should(visible).setValue(text).pressEnter();
+        groupList.shouldBe(visible);
+        assertTrue(groupList.getAttribute("data-active").contains("true"));
     }
 }
