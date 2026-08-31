@@ -68,7 +68,7 @@ public class LoginPageTests extends BaseTest {
     }
 
     @Test
-    public void verifyQrCodeAndOtherElementsVisibility() throws InterruptedException {
+    public void verifyQrCodeAndOtherElementsVisibility() {
         loginPage.qRCodeButtonClick();
         loginPage.qRCodePageElementsCheck();
     }
@@ -84,7 +84,7 @@ public class LoginPageTests extends BaseTest {
 
     @Test
     //@RetryingTest(maxAttempts = 3)
-    public void groupsSearchTest() throws InterruptedException {
+    public void groupsSearchTest() {
         loginPage.enterDataInSearchFieldAndClickSearchButton("Тестировщик");
     }
 }
