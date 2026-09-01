@@ -1,7 +1,7 @@
-package tests;
+package tests.web;
 
 import core.base.BaseTest;
-import core.pages.LoginPage;
+import core.pages.web.LoginPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +68,7 @@ public class LoginPageTests extends BaseTest {
     }
 
     @Test
-    public void verifyQrCodeAndOtherElementsVisibility() throws InterruptedException {
+    public void verifyQrCodeAndOtherElementsVisibility() {
         loginPage.qRCodeButtonClick();
         loginPage.qRCodePageElementsCheck();
     }
@@ -83,7 +83,8 @@ public class LoginPageTests extends BaseTest {
     }
 
     @Test
-    public void groupsSearchTest() throws InterruptedException {
+    //@RetryingTest(maxAttempts = 3)
+    public void groupsSearchTest() {
         loginPage.enterDataInSearchFieldAndClickSearchButton("Тестировщик");
     }
 }

@@ -10,17 +10,11 @@ import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
-public class BaseTest {
+public class BaseTest extends AbstractBaseTest {
 
-    protected static String baseUrl;
+    @Override
+    protected void configure() {
 
-    @BeforeEach
-    public void setUp() {
-/*        baseUrl = determineBaseUrl();
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";*/
-
-        baseUrl = determineBaseUrl();
         if (baseUrl == null || baseUrl.isEmpty()) {
             // Если URL не найден в конфиге, используем значение по умолчанию
             baseUrl = "https://ok.ru";
@@ -34,31 +28,5 @@ public class BaseTest {
 
         System.out.println("Base URL set to: " + baseUrl);
 
-    }
-
-    private static String determineBaseUrl() {
-        String environment = System.getProperty("env", "test");
-        String configFileName = "application-" + environment + ".properties";
-
-        Properties properties = new Properties();
-        try (InputStream input = BaseTest.class.getClassLoader().getResourceAsStream(configFileName)) {
-            if (input == null) {
-                throw new IllegalStateException("Configuration file not found: " + configFileName);
-            }
-            properties.load(input);
-        } catch (Exception e) {
-            throw new IllegalStateException("Unable to load configuration file: " + configFileName, e);
-        }
-
-        return properties.getProperty("baseUrl");
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
-    }
-
-    @AfterEach
-    public void tearDown() {
-        closeWebDriver();
     }
 }

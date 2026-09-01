@@ -1,4 +1,4 @@
-package core.pages;
+package core.pages.web;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -15,21 +15,15 @@ public class LoginPage extends BasePage {
     private SelenideElement usernameField = $("[name='st.email']");
     private SelenideElement passwordField = $("[name='st.password']");
     private SelenideElement loginButton = $x("//*[text()='Sign in']");
-    //private SelenideElement forgotPasswordLink = $("[data-l='t'][restore']");
     private SelenideElement forgotPasswordLink = $x("//button[@data-test-id='forgot-password-link']");
-    //private SelenideElement registrationButton = $x("//*[text()='\"Sign in\"']");
     private SelenideElement registrationButton = $x("//button[@data-test-id='registration-action']");
 
     // Локаторы для кнопок соцсетей
-    //private SelenideElement vkButton = $("[data-l='t'][vk']");
     private SelenideElement vkButton = $x("//a[@data-l='t,vkc']");
-    //private SelenideElement googleButton = $("[data-l='t'][google']"); // исправлено
     private SelenideElement googleButton = $x("//i[@class='i ic social-icon __s __gp']");
-    //private SelenideElement mailRuButton = $("[data-l='t'][mailru']"); // исправлено
     private SelenideElement mailRuButton = $x("//i[@class='i ic social-icon __s __mailru']");
 
     // Локатор для элемента с сообщением об ошибке входа
-    //private SelenideElement errorMessage = $(".input-e.login_error");
     private SelenideElement errorMessage = $x("//span[@data-test-id='login-form-error']");
 
     // Локатор для перехода к восстановлению
