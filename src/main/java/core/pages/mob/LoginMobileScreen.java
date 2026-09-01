@@ -45,10 +45,6 @@ public class LoginMobileScreen extends BasePage {
     private SelenideElement clickSearchIcon = $x("(//button[@data-tsid='toolbar-searchButton' and @aria-label='Искать'])[2]");
 
 
-/*    {
-        verifyPageElements();
-    }*/
-
     @Step("Проверяем видимость всех элементов скрина")
     public void verifyPageElements() {
         usernameField.shouldBe(visible);

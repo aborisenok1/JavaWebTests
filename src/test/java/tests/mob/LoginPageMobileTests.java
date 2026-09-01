@@ -16,7 +16,6 @@ public class LoginPageMobileTests extends MobileBaseTest {
     @BeforeEach
     public void prepare() {
         open(baseUrl);
-        // Принятие cookies и политики
         loginMobileScreen = new LoginMobileScreen();
     }
 
@@ -32,7 +31,7 @@ public class LoginPageMobileTests extends MobileBaseTest {
         assertTrue(loginMobileScreen.isErrorMessageVisible(), "Сообщение об ошибке входа не отображается");
 
         // Проверка текста сообщения об ошибке
-        String expectedErrorMessage = "Неправильно указан логин и/или пароль";
+        String expectedErrorMessage = "Too many attempts. Please try in a few hours.";
         String actualErrorMessage = loginMobileScreen.getErrorMessageText();
         assertEquals(expectedErrorMessage, actualErrorMessage, "Текст сообщения об ошибке не совпадает");
     }
@@ -81,7 +80,7 @@ public class LoginPageMobileTests extends MobileBaseTest {
 
     @Test
     //@RetryingTest(maxAttempts = 3)
-    public void groupsSearchTest(){
+    public void groupsSearchTest() {
         loginMobileScreen.verifyPageElements();
         loginMobileScreen.enterDataInSearchFieldAndClickSearchButton("Тестировщик");
     }

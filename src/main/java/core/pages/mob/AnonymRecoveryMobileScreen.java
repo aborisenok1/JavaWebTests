@@ -29,11 +29,6 @@ public class AnonymRecoveryMobileScreen extends BasePage {
     private SelenideElement customerSupportTeamButton = $(byCssSelector("[class='support-link_item-text']"));
 
 
-/*    // Конструктор
-    public AnonymRecoveryMobileScreen() {
-        verifyMobileScreenElements();
-    }*/
-
     @Step("Проверяем видимость всех элементов на странице восстановления пароля")
     private void verifyMobileScreenElements() {
         recoveryByPhoneButton.shouldBe(visible);

@@ -15,23 +15,18 @@ public class AnonymRecoveryPage extends BasePage {
     private SelenideElement recoveryByPhoneButton = $(byCssSelector("[class='svg-ic svg-ico_phone_24 svg-ic48']"));
     private SelenideElement recoveryByEmailButton = $(byCssSelector("[data-l='t,email']"));
     private SelenideElement goToSupportButton = $x("//div[@class='support-link_item-text']");
-    private SelenideElement getCodeButtonOnThePhonePage = $x("//input[@class='button-pro __wide js-proceed-registration']");
+    private SelenideElement getCodeButtonOnThePhonePage = $(byCssSelector("[tsid='abstract-phone-link-block_input_683b97']"));
     private SelenideElement getCodeButtonOnTheEmailPage = $(byCssSelector("[data-l='t,submit']"));
     private SelenideElement phoneField = $x("//input[@tsid='phone-form_input_fe1c7a']");
     private SelenideElement emailField = $(byCssSelector("[id='field_email']"));
-    private SelenideElement countryRegionDropDown = $x("//input[@data-popular-locale='Popular']");
+    private SelenideElement countryRegionDropDown = $(byCssSelector("[class='it js-country-input']"));
     private SelenideElement getCodeButton = $(byCssSelector("[class='button-pro __wide js-proceed-registration']"));
     private SelenideElement incorrectPhoneMessage = $(byCssSelector("[class='input-e js-ph-vl-hint']"));
     private SelenideElement customerSupportTeamButton = $(byCssSelector("[class='support-link_item-text']"));
 
 
-    // Конструктор
-    public AnonymRecoveryPage() {
-        verifyPageElements();
-    }
-
     @Step("Проверяем видимость всех элементов на странице восстановления пароля")
-    private void verifyPageElements() {
+    public void verifyPageElements() {
         recoveryByPhoneButton.shouldBe(visible);
         recoveryByEmailButton.shouldBe(visible);
         goToSupportButton.shouldBe(visible);

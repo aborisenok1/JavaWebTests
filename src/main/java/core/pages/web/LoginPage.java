@@ -14,7 +14,8 @@ public class LoginPage extends BasePage {
 
     private SelenideElement usernameField = $("[name='st.email']");
     private SelenideElement passwordField = $("[name='st.password']");
-    private SelenideElement loginButton = $x("//*[text()='Sign in']");
+    private SelenideElement loginButton = $("[data-test-id='enter-action']");
+
     private SelenideElement forgotPasswordLink = $x("//button[@data-test-id='forgot-password-link']");
     private SelenideElement registrationButton = $x("//button[@data-test-id='registration-action']");
 
@@ -28,7 +29,6 @@ public class LoginPage extends BasePage {
 
     // Локатор для перехода к восстановлению
     private SelenideElement goToRecoveryButton = $("[data-test-id='recovery-action']");
-
     private SelenideElement qRCodeButton = $("[data-l='t,qr_tab']");
     private SelenideElement getACodeForQuickLogInToOK = $("[class='qr_code_info_header']");
     private SelenideElement textBlock = $("[class='qr_code_info_instruction_list']");
@@ -41,12 +41,9 @@ public class LoginPage extends BasePage {
     private SelenideElement searchFieldInHeader = $("[name='st.query']");
     private SelenideElement groupList = $x("//a[@href=\"/groups\" and @data-active=\"true\"]");
 
-    {
-        verifyPageElements();
-    }
 
     @Step("Проверяем видимость всех элементов страницы")
-    private void verifyPageElements() {
+    public void verifyPageElements() {
         usernameField.shouldBe(visible);
         passwordField.shouldBe(visible);
         loginButton.shouldBe(visible);
