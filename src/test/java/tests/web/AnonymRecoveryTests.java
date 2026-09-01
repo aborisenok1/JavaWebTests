@@ -19,20 +19,20 @@ public class AnonymRecoveryTests extends BaseTest {
 
     @Test
     public void anonymRecoveryTestByEmail() {
-
         // Переходим к восстановлению профиля по e-mail-у
         open("https://ok.ru/dk?st.cmd=anonymRecoveryStart");
         anonymRecoveryPage = new AnonymRecoveryPage();
+        anonymRecoveryPage.verifyPageElements();
         anonymRecoveryPage.goToRecoveryByEmail();
         anonymRecoveryPage.verifyElementsOnTheRecoveryByEmailPage();
     }
 
     @Test
     public void anonymRecoveryTestByPhone() {
-
         // Переходим к восстановлению профиля по телефону
         open("https://ok.ru/dk?st.cmd=anonymRecoveryStart");
         anonymRecoveryPage = new AnonymRecoveryPage();
+        anonymRecoveryPage.verifyPageElements();
         anonymRecoveryPage.goToRecoveryByPhone();
         anonymRecoveryPage.verifyElementsOnTheRecoveryByPhonePage();
 

@@ -23,6 +23,7 @@ public class LoginPageTests extends BaseTest {
     @Test
     public void loginWithWrongCredentials() {
         // Попытка входа с некорректными данными
+        loginPage.verifyPageElements();
         loginPage.login("incorrectUser");
         loginPage.password("incorrectPassword");
         loginPage.click();
@@ -32,13 +33,14 @@ public class LoginPageTests extends BaseTest {
         assertTrue(loginPage.isErrorMessageVisible(), "Сообщение об ошибке входа не отображается");
 
         // Проверка текста сообщения об ошибке
-        String expectedErrorMessage = "Неправильно указан логин и/или пароль";
+        String expectedErrorMessage = "Too many attempts. Please try in a few hours.";
         String actualErrorMessage = loginPage.getErrorMessageText();
         assertEquals(expectedErrorMessage, actualErrorMessage, "Текст сообщения об ошибке не совпадает");
     }
 
     @Test
     public void loginWithWrongLoginAndBlankPassword() {
+        loginPage.verifyPageElements();
         loginPage.password("incorrectPassword");
         loginPage.click();
 
@@ -54,6 +56,7 @@ public class LoginPageTests extends BaseTest {
 
     @Test
     public void loginWithBlankLoginAndWrongPassword() {
+        loginPage.verifyPageElements();
         loginPage.password("incorrectPassword");
         loginPage.click();
 
@@ -69,12 +72,14 @@ public class LoginPageTests extends BaseTest {
 
     @Test
     public void verifyQrCodeAndOtherElementsVisibility() {
+        loginPage.verifyPageElements();
         loginPage.qRCodeButtonClick();
         loginPage.qRCodePageElementsCheck();
     }
 
     @Test
     public void customerSupportTeamPopupTest() {
+        loginPage.verifyPageElements();
         loginPage.cantSignInButtonClick();
         loginPage.contactCustomerSupportTeamButtonClick();
         loginPage.contactCustomerSupportTeamElementsCheck();
@@ -85,6 +90,7 @@ public class LoginPageTests extends BaseTest {
     @Test
     //@RetryingTest(maxAttempts = 3)
     public void groupsSearchTest() {
+        loginPage.verifyPageElements();
         loginPage.enterDataInSearchFieldAndClickSearchButton("Тестировщик");
     }
 }
