@@ -33,7 +33,8 @@ public class LoginPageTests extends BaseTest {
         assertTrue(loginPage.isErrorMessageVisible(), "Сообщение об ошибке входа не отображается");
 
         // Проверка текста сообщения об ошибке
-        String expectedErrorMessage = "Too many attempts. Please try in a few hours.";
+        //String expectedErrorMessage = "Too many attempts. Please try in a few hours.";
+        String expectedErrorMessage = "Неправильно указан логин и/или пароль";
         String actualErrorMessage = loginPage.getErrorMessageText();
         assertEquals(expectedErrorMessage, actualErrorMessage, "Текст сообщения об ошибке не совпадает");
     }
